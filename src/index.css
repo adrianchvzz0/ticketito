@@ -18,11 +18,11 @@ code {
 }
 
 .btn-default {
-  @apply bg-button-default text-white px-10 py-2 rounded-xl shadow-lg transition duration-300;
+  @apply bg-button-default text-white px-10 py-2 rounded-lg shadow-lg font-bold transition duration-300;
 }
 
 .btn-default:hover {
-  @apply bg-button-hover transition duration-300;
+  @apply bg-button-hover transition duration-1000;
 }
 
 .btn-default:active {

@@ -1,10 +1,9 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import axios from "axios";
 import { useState } from "react";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
+import { auth } from "../../firebase/firebaseConfig";
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 export default function LoginForm({ onSwitch }) {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -14,13 +13,12 @@ export default function LoginForm({ onSwitch }) {
     const onSubmit = async (data) => {
         setLoading(true);
         try {
-            const response = await axios.post("http://localhost:2000/login", data);
-            console.log("Login Success:", response.data);
-
-            localStorage.setItem("user", JSON.stringify(response.data));
+            const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
+            const user = userCredential.user;
+            localStorage.setItem("user", JSON.stringify(user));
             navigate("/");
         } catch (error) {
-            console.error("Login Error:", error.response?.data || error.message);
+            console.error("Login Error:", error.message);
             alert("Error al iniciar sesión. Verifica tus credenciales.");
         } finally {
             setLoading(false);
@@ -28,11 +26,9 @@ export default function LoginForm({ onSwitch }) {
     };
 
     const handleGoogleLogin = async () => {
-        const auth = getAuth();
         const provider = new GoogleAuthProvider();
         try {
             const result = await signInWithPopup(auth, provider);
-            const token = await result.user.getIdToken();
             localStorage.setItem("user", JSON.stringify(result.user));
             navigate("/");
         } catch (error) {

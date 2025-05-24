@@ -58,7 +58,7 @@ app.post("/login", async (req, res) => {
         const { email, password } = req.body;
 
         const firebaseConfig = {
-            apiKey: "AIzaSyANUS8lLuJ0TTiY3URabORxhT2ix8mpmiU",
+            apiKey: process.env.FIREBASE_API_KEY,
             authDomain: "api-ticket-78439.firebaseapp.com",
             projectId: "api-ticket-78439",
         };

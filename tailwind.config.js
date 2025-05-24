@@ -14,7 +14,8 @@ module.exports = {
         //Colores de Fondo
         BackgroundBlue: '#10111B',
         BackgroundBlueDark: '#1C1C27',
-        BackgroundGray: '#1E1F26',
+        BackgroundGray: '#2A323D',
+        BackgroundEvents: '#282932',
         gradientBlue: '#010852',
         gradientGreen: '#84D7B0',
         GreenDark: '#45715C',
