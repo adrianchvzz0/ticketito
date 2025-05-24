@@ -1,5 +1,4 @@
 {
-{
   "name": "ticketito-backend",
   "version": "1.0.0",
   "private": true,
@@ -8,65 +7,13 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "firebase-admin": "^13.1.0",
-    "stripe": "^14.0.0"
+    "multer": "^1.4.5-lts.1",
+    "stripe": "^18.1.1"
   },
   "scripts": {
     "start": "node server.js"
-  }
-}
-
-    "react-router-dom": "^7.1.5",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^4.2.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build:css": "tailwindcss -i ./src/styles/index.css -o ./public/output.css --watch"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.5.1",
-    "tailwindcss": "^3.4.17"
-=======
-  "name": "backend",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "firebase-admin": "^13.1.0",
-    "multer": "^1.4.5-lts.1",
-    "stripe": "^18.1.1"
->>>>>>> 24aea4a (v2backend - Se agregó stripe y se cambiaron configuraciones generales de los endpoints)
-  }
+  "license": "ISC"
 }
