@@ -1,23 +1,14 @@
-const express = require("express")
+require('dotenv').config();
 const admin = require("firebase-admin");
 const multer = require("multer");
-const path = require("path");
-const cors = require("cors");
-require("dotenv").config();
+//Inicializa firebase con el storage
 
-
-const app = express();
-const PORT = process.env.PORT || 2000;
-
-// Inicializar Firebase Admin
-const serviceAccount = require("./firebase-admin.json");
+const serviceAccount = require(process.env.FIREBASE_ADMIN_CREDENTIALS);
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    //storage images
-    storageBucket: "api-ticket-78439.firebasestorage.app",
-    //realtime database
-    databaseURL: "https://api-ticket-78439.firebaseio.com",
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    databaseURL: process.env.FIREBASE_DATABASE_URL,
 });
 
 const db = admin.firestore();
@@ -30,7 +21,6 @@ app.use(express.json());
 //Configurar multer para recibir archivos
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
-
 
 // Registro de usuario
 app.post("/users", async (req, res) => {
@@ -57,16 +47,7 @@ app.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        const firebaseConfig = {
-            apiKey: process.env.FIREBASE_API_KEY,
-            authDomain: "api-ticket-78439.firebaseapp.com",
-            projectId: "api-ticket-78439",
-        };
-
-        const firebaseApp = initializeApp(firebaseConfig);
-        const auth = getAuth(firebaseApp);
-
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const userCredential = await admin.auth().signInWithEmailAndPassword(email, password);
         const token = await userCredential.user.getIdToken();
 
         res.status(200).json({ token, user: userCredential.user });
@@ -80,9 +61,8 @@ app.post("/login/google", async (req, res) => {
     try {
         const { idToken } = req.body;
 
-        const credential = GoogleAuthProvider.credential(idToken);
-        const auth = getAuth();
-        const result = await signInWithCredential(auth, credential);
+        const credential = admin.auth.GoogleAuthProvider.credential(idToken);
+        const result = await admin.auth().signInWithCredential(credential);
         const token = await result.user.getIdToken();
 
         res.json({ token, user: result.user });
@@ -107,7 +87,6 @@ app.get("/users/:uid", async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
 
 // Agrega un nuevo evento
 app.post("/addEvent", async (req, res) => {
