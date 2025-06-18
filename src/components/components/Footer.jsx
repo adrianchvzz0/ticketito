@@ -9,16 +9,16 @@ const Footer = () => {
             <div className="container mx-auto px-4 text-center">
                 {/* Redes Sociales */}
                 <div className="flex justify-center space-x-6 mb-4">
-                    <a href="#" className="text-xl hover:text-gray-400">
+                    <a className="text-xl hover:text-gray-400">
                         <FaInstagram />
                     </a>
-                    <a href="#" className="text-xl hover:text-gray-400">
+                    <a className="text-xl hover:text-gray-400">
                         <FaFacebookF />
                     </a>
-                    <a href="#" className="text-xl hover:text-gray-400">
+                    <a className="text-xl hover:text-gray-400">
                         <FaEnvelope />
                     </a>
-                    <a href="#" className="text-xl hover:text-gray-400">
+                    <a className="text-xl hover:text-gray-400">
                         <FaTiktok />
                     </a>
                 </div>
@@ -28,7 +28,7 @@ const Footer = () => {
 
                 {/* Enlaces */}
                 <div className="flex justify-center space-x-8 text-sm font-semibold">
-                    <a href="#" className="hover:text-gray-400">Preguntas Frecuentes</a>
+                    <a className="hover:text-gray-400">Preguntas Frecuentes</a>
                     <Link to='/about'>
                         <p className="hover:text-gray-400">Nosotros</p>
                     </Link>
