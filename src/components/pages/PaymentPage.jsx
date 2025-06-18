@@ -12,7 +12,7 @@ const CheckoutForm = () => {
 
   useEffect(() => {
     if (!amount) return;
-    fetch("http://localhost:4000/payment/create-payment-intent", {
+    fetch("http://localhost:4001/payment/create-payment-intent", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ amount: amount * 100, currency: 'mxn' })
