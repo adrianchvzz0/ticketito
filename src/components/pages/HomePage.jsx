@@ -76,7 +76,7 @@ export default function HomePage() {
   if (loading) return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-BackgroundBlue">
       <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-PrimaryGreen mb-4"></div>
-      <span className="text-white text-lg">Cargando evento...</span>
+      <span className="text-white text-lg">Cargando eventos...</span>
     </div>
   );
 
