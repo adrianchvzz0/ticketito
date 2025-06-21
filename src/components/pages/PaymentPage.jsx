@@ -12,7 +12,7 @@ const CheckoutForm = () => {
 
   useEffect(() => {
     if (!amount) return;
-    fetch("http://backend-00.netlify.app/payment/create-payment-intent", {
+    fetch("https://backend-00.netlify.app/payment/create-payment-intent", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ amount: amount * 100, currency: 'mxn' })
