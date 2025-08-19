@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { UserCircle } from "lucide-react";
 import { useAuth } from "../../firebase/authContext";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebaseConfig";
 import axios from "axios";
 
 export default function Header({ selectedCity, setSelectedCity }) {
@@ -13,6 +15,7 @@ export default function Header({ selectedCity, setSelectedCity }) {
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
     const [scrollPosition, setScrollPosition] = useState(0);
+    const [userDisplayName, setUserDisplayName] = useState("");
     const menuRef = useRef(null);
 
     useEffect(() => {
@@ -34,6 +37,36 @@ export default function Header({ selectedCity, setSelectedCity }) {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Efecto para obtener el nombre del usuario
+    useEffect(() => {
+        const fetchUserName = async () => {
+            if (user) {
+                try {
+                    // Si el usuario tiene displayName (Google), usarlo
+                    if (user.displayName) {
+                        setUserDisplayName(user.displayName);
+                    } else {
+                        // Si no tiene displayName (registro por email), obtenerlo de Firestore
+                        const userDoc = await getDoc(doc(db, "users", user.uid));
+                        if (userDoc.exists()) {
+                            const userData = userDoc.data();
+                            setUserDisplayName(userData.name || "Usuario");
+                        } else {
+                            setUserDisplayName("Usuario");
+                        }
+                    }
+                } catch (error) {
+                    console.error("Error al obtener el nombre del usuario:", error);
+                    setUserDisplayName("Usuario");
+                }
+            } else {
+                setUserDisplayName("");
+            }
+        };
+
+        fetchUserName();
+    }, [user]);
 
     useEffect(() => {
         axios
@@ -85,7 +118,7 @@ export default function Header({ selectedCity, setSelectedCity }) {
                 }}
             >
                 <Link to="/">
-                    <img src={require("../../assets/logoTicketito.png")} alt="logoTicketito" className="w-auto h-12" />
+                    <img src="/logoTicketito.webp" alt="logoTicketito" className="w-auto h-12" />
                 </Link>
 
                 <select
@@ -140,8 +173,8 @@ export default function Header({ selectedCity, setSelectedCity }) {
                             aria-haspopup="true"
                         >
                             <UserCircle size={36} color="#84D7B0" />
-                            {user.displayName && (
-                                <span className="text-white font-bold">{user.displayName}</span>
+                            {userDisplayName && (
+                                <span className="text-white font-bold">{userDisplayName}</span>
                             )}
                         </button>
                         <div className={`absolute right-0 mt-2 w-48 bg-BackgroundBlue text-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-200 ease-in-out z-[9999] ${menuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'

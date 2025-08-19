@@ -2,7 +2,7 @@ import { useState } from "react";
 import { UserCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../firebase/authContext";
-import logoTicketito from "../../assets/logoTicketito.png"; // Importación correcta de imágenes
+// Importación correcta de imágenes
 
 
 const ciudades = [
@@ -22,7 +22,7 @@ const Header = ({ selectedCity, setSelectedCity, searchTerm, setSearchTerm, filt
         <header className="bg-gradient-to-r from-gradientBlue via-gradientGreen to-GreenDark p-6 flex justify-between items-center shadow-2xl font-sans mb-10">
             {/* Logo */}
             <Link to="/">
-                <img src={logoTicketito} alt="logoTicketito" className="w-auto h-12" />
+                <img src="/logoTicketito.webp" alt="logoTicketito" className="w-auto h-12" />
             </Link>
 
             {/* Selector de ciudad */}

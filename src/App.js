@@ -9,6 +9,7 @@ import { AuthProvider } from "./firebase/authContext";
 import PolicyPage from "./components/pages/PolicyPage";
 import Profile from "./components/pages/Profile";
 import PaymentPage from "./components/pages/PaymentPage";
+import AdminEventsPage from "./components/pages/AdminEventsPage";
 
 export default function App() {
   return (
@@ -30,6 +31,8 @@ export default function App() {
         <Route path="/profile" element={<Profile />} />
 
         <Route path="/payment" element={<PaymentPage />} />
+
+        <Route path="/admin/events" element={<AdminEventsPage />} />
       </Routes>
 
     </AuthProvider>
